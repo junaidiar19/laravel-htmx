@@ -12,7 +12,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $params = request()->query();
+        $users = User::filter($params)->latest()->paginate(10);
+
+        // return $users;
 
         return view('users.index', compact('users'));
     }
@@ -54,7 +57,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return to_route('users.index')->with(['success' => 'User updated successfully.']);
+        return to_route('home')->with(['success' => 'User updated successfully.']);
     }
 
     /**

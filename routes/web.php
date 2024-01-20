@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return to_route('users.index');
     return view('welcome');
-});
+})->name('home');
 
 Route::resource('users', UserController::class)->except(['show', 'create']);
